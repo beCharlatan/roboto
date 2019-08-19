@@ -1,32 +1,33 @@
-import React from 'react';
-import cx from 'classnames';
+import React from 'react'
+import cl from 'classnames'
+import icons from '../utils/icons'
 
 const TextInput = ({
   name,
   error,
-  labelClass,
-  inputClass,
   placeholder,
-  validate,
+  size,
+  icon,
   ...props }) => {
-  return (
+  return <div
+    className={cl('form__section', 
+      size === 'sm' && 'form__section--sm')}>
+    <input
+      name={name}
+      placeholder={placeholder}
+      id={`id-${name}`}
+      className={cl('form__input', {
+        'form__input--error': error
+      })}
+      {...props}
+    />
     <label
-      className={cx('label', !!labelClass && labelClass)}
+      className={`form__label`}
       htmlFor={`id-${name}`}>
-      <span className="span">{placeholder}</span>
-      <input
-        className={cx(
-          'input',
-          !!inputClass && inputClass,
-          !!error && 'error'
-        )}
-        name={name}
-        id={`id-${name}`}
-        {...props}
-      />
-      {/* {!!error && <span className="errorText">{error}</span>} */}
+      {placeholder}
     </label>
-  );
+    {icon && <div className="form__icon">{icons[icon]}</div>}
+  </div>
 }
 
 export default TextInput;

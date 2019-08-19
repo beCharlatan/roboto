@@ -1,0 +1,300 @@
+$color-black: #0E0E0E;
+$color-white: #EEEEEE;
+
+@mixin respond($val) {
+
+  // iphone 7, width = 375 px
+  @if ($val == iphone) {
+    @media only screen and (max-width: 24em) { @content };
+  }
+
+  // ipad pro 10,5, width = 834 px
+  @if ($val == ipad) {
+    @media only screen and (max-width: 53em) { @content };
+  }
+}
+
+*,
+*::after
+,*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Helvetica Now Text', sans-serif;
+  line-height: 25px;
+  color: $color-white;
+}
+
+.wrapper {
+  background-color: $color-black;
+  width: 100vw;
+  height: 100vh;
+
+  @include respond(ipad) {
+    margin-top: 7rem;
+    height: calc(100vh - 14rem);
+  }
+
+  @include respond(iphone) {
+    margin-top: 7rem;
+  }
+}
+
+.block {
+  position: absolute;
+  width: 669px;
+  height: 143px;
+}
+
+.close {
+  top: 1.85%;
+  left: 32px;
+  font-size: 3rem;
+  
+  @include respond(ipad) {
+    top: 9.6rem;
+    left: 1.8rem;
+  }
+
+  @include respond(iphone) {
+    top: 8rem;
+    left: 1.2rem;
+    font-size: 1.6rem;
+  }
+}
+
+.privacy-policy {
+  bottom: 0;
+  left: 32px;
+  font-size: 1.8rem;
+
+  @include respond(ipad) {
+    left: 8.2rem;
+    bottom: 1.7rem;
+    text-align: center;
+  }
+
+  @include respond(iphone) {
+    display: none;
+  }
+  
+  span {
+    text-decoration: underline;
+  }
+}
+
+.main-logo {
+  position: absolute;
+  top: 30px;
+  right: 31px;
+  width: 81px;
+  height: 70px;
+
+  @include respond(ipad) {
+    display: none;
+  }
+}
+
+.form {
+  font-size: 1.4rem;
+  position: relative;
+  width: 593px;
+  height: 272px;
+  margin: 0 auto;
+  top: calc(50vh - 272px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  @include respond(ipad) {
+    top: 16.4rem;
+    margin: 0 1.95rem;
+    width: 79.5rem;
+  }
+
+  @include respond(iphone) {
+    top: 10rem;
+    margin: 0 1.2rem;
+    width: calc(100vw - 2.4rem);
+    font-size: 1.2rem;
+    height: 37.3rem;
+  }
+
+  &__section {
+    position: relative;
+    width: 590px;
+
+    &--double {
+      display: flex; 
+      justify-content: space-between;
+      width: 100%;
+
+      @include respond(iphone) {
+        flex-direction: column;
+        height: 11rem;
+      }
+    }
+
+    @include respond(ipad) {
+      width: 79.5rem;
+    }
+
+    @include respond(iphone) {
+      width: 100%;
+    }
+
+    &--sm {
+      width: 274px;
+
+      @include respond(ipad) {
+        width: 38.8rem;
+      }
+
+      @include respond(iphone) {
+        width: 100%;
+      }
+    }
+  }
+
+  &__select {
+    appearance: none;
+    font-size: 1.4rem !important;
+
+    option {
+      display: none;
+    }
+  }
+
+  &__options {
+    position: absolute;
+    transform: translateY(-15%);
+    width: 300px;
+    height: 377px;
+    overflow-y: auto;
+    background-color: $color-white;
+    color: $color-black;
+    border: .1rem solid $color-black;
+    border-radius: 5px;
+    z-index: 100;
+
+    &::-webkit-scrollbar { width: 0; }
+
+    li {
+      font-size: 1.8rem;
+      border-bottom: 1px solid rgba($color-black, .1);
+      padding: 15px 11px;
+      cursor: pointer;
+    }
+  }
+
+  &__input {
+    padding: 7px 0 13px 0;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid #EEEEEE;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    color: inherit;
+    font-size: 1.8rem;
+
+    @include respond(iphone) {
+      font-size: 1.4rem;
+    }
+
+    &--error {
+      color: #FF5C00;
+    }
+
+    &::-webkit-input-placeholder {
+      font-size: 1.2rem;
+      color: #EEEEEE;
+      text-transform: uppercase;
+    }
+
+    &:placeholder-shown + .form__label {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(4rem);
+    }
+  }
+
+  &__label {
+    position: absolute;
+    top: -25px;
+    left: 0;
+    text-transform: uppercase;
+    transition: all .5s;
+    color: #F8F8F8;
+    opacity: .4;
+  }
+
+  &__icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    transform: translateY(25%);
+  }
+
+  &__submit {
+    width: 230px;
+    height: 60px;
+    margin-bottom: -100px;
+    align-self: center;
+    border-radius: 110px;
+    border: 2px solid #EEEEEE;
+    font-size: 1.8rem;
+    outline: none;
+    background-color: #EEEEEE;
+    cursor: pointer;
+
+    @include respond(iphone) {
+      width: 17.2rem;
+      height: 4rem;
+      font-size: 1.4rem;
+      margin-bottom: -4rem;
+    }
+  }
+}
+
+.log {
+  font-size: 1.4rem;
+  position: relative;
+  width: 593px;
+  margin: 0 auto;
+  top: 65px;
+  color: #FF5C00;
+
+  @include respond(ipad) {
+    top: 14rem;
+    margin: 2rem;
+  }
+
+  @include respond(iphone) {
+    top: 8rem;
+    margin: 1.2rem;
+  }
+}
+
+.congrats {
+  position: relative;
+  margin: 0 auto;
+  top: calc(50vh - 60px);
+  width: 689px;
+  height: 60px;
+  font-size: 3rem;
+  text-align: center;
+
+  @include respond(ipad) {
+    top: 46.6rem;
+  }
+}

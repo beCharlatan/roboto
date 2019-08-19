@@ -1,9 +1,11 @@
 import React from 'react'
+import {connect} from 'react-redux'
+import {sendForm} from '../redux/form'
 import {required, greaterThan, validateField, validateForm} from '../utils/validators'
 
 export default function withForm(C) {
 
-  return class FormContainer extends React.Component {
+  class FormContainer extends React.Component {
     state = {
       sended: false,
       maySend: false,
@@ -85,11 +87,10 @@ export default function withForm(C) {
       const { form } = this.state;
       const data = {}
       for (let key in form) {
-        data[key] = form[key]['value']
-        
+        data[key] = form[key]['value'] 
       }
       console.log(data, 'data')
-      
+      this.props.sendForm()
     }
 
     render() {
@@ -101,5 +102,7 @@ export default function withForm(C) {
         handleSend={this.handleSend}
       />
     }
-  };
+  }
+
+  return connect(null, {sendForm})(FormContainer)
 }
